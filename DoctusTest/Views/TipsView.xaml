@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:services="clr-namespace:DoctusTest.Services"
+    services:Locator.AutoWireViewModel="True"
+    xmlns:viewmodels="clr-namespace:DoctusTest.ViewModels"
+    Title="Tips"
+    x:Class="DoctusTest.Views.TipsView">
+    <ContentPage.Content>
+        <Grid
+            RowDefinitions="*,Auto">
+
+            <CollectionView
+                ItemsSource="{Binding Tips}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            Padding="12">
+                       
+                            <Grid
+                                ColumnDefinitions="*, Auto, Auto">
+                                <Frame
+                                    HasShadow="False"
+                                    CornerRadius="8"
+                                    BorderColor="Black">
+
+                                    <StackLayout
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center">
+                                        <Label
+                                            Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}"/>
+                                        <Label
+                                            Text="{Binding Title}"/>
+                                    </StackLayout>
+
+                                </Frame>
+
+                                <Button
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TipsViewModel}},Path=SeeTipCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Grid.Column="1"
+                                    Text="Ver"/>
+
+                                <Button
+                                    Grid.Column="2"
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TipsViewModel}},Path=DeleteTipCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Text="Borrar"/>
+                            </Grid>
+                            </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button
+                HorizontalOptions="Center"
+                Margin="10"
+                Command="{Binding AddTipCommand}"
+                Grid.Row="1"
+                Text="Crear"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:services="clr-namespace:DoctusTest.Services"
+    services:Locator.AutoWireViewModel="True"
+    Title="{Binding Tip.Title}"
+    x:Class="DoctusTest.Views.TipDetailView">
+    <ContentPage.Content>
+        <Grid
+            Margin="15"
+            RowSpacing="15"
+            RowDefinitions="Auto, Auto, Auto, Auto">
+            <Label
+                HorizontalTextAlignment="Center"
+                FontSize="Medium"
+                IsVisible="{Binding CanEdit, Converter={StaticResource BoolConverter}}"
+                Text="{Binding Tip.Date, StringFormat='{0:dd/MM/yyyy}'}"/>
+
+            <DatePicker
+                IsVisible="{Binding CanEdit}"
+                Date="{Binding Tip.Date}"/>
+
+            <Label
+                Grid.Row="1"
+                HorizontalTextAlignment="Center"
+                FontSize="Large"
+                IsVisible="{Binding CanEdit, Converter={StaticResource BoolConverter}}"
+                FontAttributes="Bold"
+                Text="{Binding Tip.Title}"/>
+
+            <Entry
+                Grid.Row="1"
+                IsVisible="{Binding CanEdit}"
+                Text="{Binding Tip.Title}"/>
+
+            <Label
+                Grid.Row="2"
+                HorizontalTextAlignment="Center"
+                IsVisible="{Binding CanEdit, Converter={StaticResource BoolConverter}}"
+                FontSize="Large"
+                Text="{Binding Tip.Description}"/>
+
+            <Editor
+                Grid.Row="2"
+                HeightRequest="100"
+                IsVisible="{Binding CanEdit}"
+                Text="{Binding Tip.Description}"/>
+
+            <Button
+                Grid.Row="3"
+                HorizontalOptions="Center"
+                Command="{Binding EditDetailCommand}"
+                Text="Editar">
+                <Button.Triggers>
+                    <DataTrigger
+                        TargetType="Button"
+                        Binding="{Binding CanEdit}"
+                        Value="True">
+                        <Setter Property="Text" Value="Actualizar"/>
+                        <Setter Property="Command" Value="{Binding UpdateDetailCommand}"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

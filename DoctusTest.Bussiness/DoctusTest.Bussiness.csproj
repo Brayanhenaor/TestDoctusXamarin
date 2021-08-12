@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DoctusTest.Data\DoctusTest.Data.csproj" />
+    <ProjectReference Include="..\DoctusTest.Entities\DoctusTest.Entities.csproj" />
+  </ItemGroup>
+</Project>
